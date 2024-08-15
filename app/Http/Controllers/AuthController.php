@@ -32,7 +32,7 @@ class AuthController extends Controller
                 case 'petugas_kasir':
                     return redirect()->route('kasir.index');
                 default:
-                    return redirect()->route('home');
+                    return redirect()->route('pelanggan.recent_transactions');
             }
         }
 

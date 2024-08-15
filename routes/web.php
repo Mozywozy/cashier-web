@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GudangController;
+use App\Http\Controllers\KasirController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
@@ -44,5 +47,21 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->middleware('auth')->group(function () {
         Route::resource('products', ProductController::class);
         Route::resource('sales', SaleController::class);
+    });
+
+    Route::prefix('petugas_gudang')->middleware('auth')->group(function () {
+        Route::resource('gudang', GudangController::class);
+    });
+
+    Route::prefix('petugas_kasir')->middleware('auth')->group(function () {
+        Route::get('/kasir/sale-details', [KasirController::class, 'showSaleDetails'])->name('kasir.sale_details');
+        Route::get('/kasir/details/export', [KasirController::class, 'exportPdf'])->name('kasir.details.export');
+        Route::resource('kasir', KasirController::class);
+    });
+
+    Route::prefix('pelanggan')->middleware(['auth'])->group(function () {
+        Route::get('recent-transactions', [PelangganController::class, 'recentTransactions'])->name('pelanggan.recent_transactions');
+        Route::get('pelanggan/transactions/{id}', [PelangganController::class, 'transactionDetails'])->name('pelanggan.transaction_details');
+
     });
 });
