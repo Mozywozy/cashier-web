@@ -14,7 +14,7 @@
                         </div>
                         <div class="card-body">
                             <p><strong>Tanggal:</strong> {{ $transaction->created_at->format('d-m-Y') }}</p>
-                            <p><strong>Total Harga:</strong> {{ $transaction->total_price }}</p>
+                            <p><strong>Total Harga:</strong>Rp. {{ $transaction->total}}</p>
                         </div>
                         <div class="card-footer">
                             <a href="{{ route('pelanggan.transaction_details', $transaction->id) }}" class="btn btn-primary">Lihat Detail</a>
